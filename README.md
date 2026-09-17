@@ -1,6 +1,6 @@
-# dgproject (until a better name is invented...)
+# Park to Podium
 
-dgproject is a strategy management game where the player develops their own disc golf park.
+Park to Podium is a strategy management game where the player develops their own disc golf park.
 
 The game starts with a simple area in nature and gradually builds:
 - disc golf holes
