@@ -34,8 +34,32 @@
   font-weight: 600;
 }
 
+.facilities {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.facility{
+  display: grid;
+  place-items: center;
+  min-height: 4rem;
+  padding: 1rem;
+  border: 1px solid #6f7f8f;
+  border-radius: 8px;
+  background-color: #e7edf2;
+  color: #1f2d38;
+  font-weight: 600;
+  text-align: center;
+}
+
 @media (max-width: 600px) {
   .holes {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .facilities {
+    grid-template-columns: 1fr;
   }
 }

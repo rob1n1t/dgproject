@@ -1,6 +1,7 @@
 import './App.css'
 
 const holeNumbers = [1, 2, 3, 4, 5, 6]
+const facilityNames = ['Practice Area', 'Pro Shop', 'Workshop']
 
 function App() {
   return (
@@ -16,6 +17,13 @@ function App() {
           ))}
         </div>
         <div className="clubhouse">Clubhouse</div>
+        <div className="facilities">
+          {facilityNames.map((facilityName) => (
+            <div className="facility" key={facilityName}>
+              {facilityName}
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   )
