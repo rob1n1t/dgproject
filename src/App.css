@@ -32,6 +32,7 @@
   background-color: #ead7b7;
   color: #3d2a12;
   font-weight: 600;
+  width: 100%;
 }
 
 .facilities {
@@ -41,7 +42,7 @@
   margin-top: 1rem;
 }
 
-.facility{
+.facility {
   display: grid;
   place-items: center;
   min-height: 4rem;
@@ -52,6 +53,20 @@
   color: #1f2d38;
   font-weight: 600;
   text-align: center;
+}
+
+.details {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #39734d;
+  border-radius: 8px;
+  background-color: #f4f8f1;
+  color: #17331f;
+  text-align: left;
+}
+
+.selected {
+  box-shadow: 0 0 0 3px #1f5f3b;
 }
 
 @media (max-width: 600px) {
