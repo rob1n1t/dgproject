@@ -124,6 +124,28 @@ When accounts and shared data are introduced, the system should include:
 - rate limiting, safe error logging, and security-focused tests;
 - an updated threat model and OWASP ASVS as verification guidance.
 
+## Cloud and Operations Learning Path
+
+Application development remains the project's primary focus, but the finished
+system should also demonstrate that it can be deployed and operated securely.
+Infrastructure should be introduced only when there is a real workload to run.
+
+The intended progression is:
+
+1. GitHub Actions for automated checks.
+2. Docker and Docker Compose for reproducible local environments.
+3. A managed Azure deployment, initially using Container Apps or App Service.
+4. Infrastructure as Code, preferably Bicep, with budgets and cost alerts.
+5. Managed identities, Azure RBAC, Key Vault, monitoring, backups, and runbooks.
+6. An optional Kubernetes/AKS deployment as a documented learning exercise,
+   not as a production dependency without a demonstrated operational need.
+
+Microsoft Entra and Microsoft 365 administration may be explored in a separate
+eligible development tenant to practise IAM and infrastructure operations. These
+labs should integrate with the game only when they serve a genuine product use
+case, such as standards-based authentication. No secrets or tenant data belong
+in the public repository.
+
 ## Deliberately Excluded
 
 The following will not be introduced without a concrete and documented need:
