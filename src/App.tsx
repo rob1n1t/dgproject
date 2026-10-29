@@ -1,56 +1,36 @@
 import { useState } from 'react'
 import './App.css'
 
-type ParkItem = {
+type Hole = {
   id: string
   name: string
-  kind: 'hole' | 'facility'
+  kind: 'hole'
 }
 
-const holes: ParkItem[] = [
-  {
-    id: 'hole-1',
-    name: 'Hole 1',
-    kind: 'hole',
-  },
-  {
-    id: 'hole-2',
-    name: 'Hole 2',
-    kind: 'hole',
-  },
-  {
-    id: 'hole-3',
-    name: 'Hole 3',
-    kind: 'hole',
-  },
-  {
-    id: 'hole-4',
-    name: 'Hole 4',
-    kind: 'hole',
-  },
-  {
-    id: 'hole-5',
-    name: 'Hole 5',
-    kind: 'hole',
-  },
-  {
-    id: 'hole-6',
-    name: 'Hole 6',
-    kind: 'hole',
-  },
-]
+type Facility = {
+  id: string
+  name: string
+  kind: 'facility'
+}
 
-const facilities: ParkItem[] = [
-  {
-    id: 'practice-area',
-    name: 'Practice Area',
-    kind: 'facility',
-  },
-  {
-    id: 'pro-shop',
-    name: 'Pro Shop',
-    kind: 'facility',
-  },
+type ParkItem = Hole | Facility
+
+type Course = {
+  holes: Hole[]
+}
+
+type Park = {
+  course: Course
+  facilities: Facility[]
+}
+
+const holes: Hole[] = []
+
+const course: Course = {
+  holes: holes,
+}
+
+const facilities: Facility[] = [
   {
     id: 'workshop',
     name: 'Workshop',
@@ -58,10 +38,15 @@ const facilities: ParkItem[] = [
   },
 ]
 
-const clubhouse: ParkItem = {
+const clubhouse: Facility = {
   id: 'clubhouse',
   name: 'Clubhouse',
   kind: 'facility',
+}
+
+const initialPark: Park = {
+  course: course,
+  facilities: [clubhouse, ...facilities],
 }
 
 function App() {
@@ -72,7 +57,12 @@ function App() {
       <section className="park">
         <h2>Disc Golf Park</h2>
         <div className="holes">
-          {holes.map((hole) => (
+          {initialPark.course.holes.length === 0 && (
+            <p className="empty-course">
+              Your course is empty. Build your first hole to get started.
+            </p>
+          )}
+          {initialPark.course.holes.map((hole) => (
             <button
               className={selectedItem?.id === hole.id ? 'hole selected' : 'hole'}
               type="button"
