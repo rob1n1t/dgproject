@@ -49,7 +49,27 @@ const initialPark: Park = {
   facilities: [clubhouse, ...facilities],
 }
 
+const firstHole: Hole = {
+  id: 'hole-1',
+  name: 'Hole 1',
+  kind: 'hole',
+}
+
+function buildFirstHole(currentPark: Park): Park {
+  if(currentPark.course.holes.length > 0){
+    return currentPark
+  }
+  return {
+    ...currentPark,
+    course: {
+      ...currentPark.course,
+      holes: [...currentPark.course.holes, firstHole],
+    },
+  }
+}
+
 function App() {
+  const [park, setPark] = useState<Park>(initialPark)
   const [selectedItem, setSelectedItem] = useState<ParkItem | null>(null)
   return (
     <main>
@@ -57,12 +77,20 @@ function App() {
       <section className="park">
         <h2>Disc Golf Park</h2>
         <div className="holes">
-          {initialPark.course.holes.length === 0 && (
-            <p className="empty-course">
-              Your course is empty. Build your first hole to get started.
-            </p>
+          {park.course.holes.length === 0 && (
+            <div className="empty-course">
+              <p>Your course is empty. Build your first hole to get started.</p>
+              <button
+                type="button"
+                onClick={() =>
+                  setPark((currentPark) => buildFirstHole(currentPark))
+                }
+              >
+                Build first hole
+              </button>
+            </div>
           )}
-          {initialPark.course.holes.map((hole) => (
+          {park.course.holes.map((hole) => (
             <button
               className={selectedItem?.id === hole.id ? 'hole selected' : 'hole'}
               type="button"
