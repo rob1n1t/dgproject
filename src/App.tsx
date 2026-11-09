@@ -17,6 +17,7 @@ type ParkItem = Hole | Facility
 
 type Course = {
   holes: Hole[]
+  capacity: 9 | 18
 }
 
 type Park = {
@@ -28,6 +29,7 @@ const holes: Hole[] = []
 
 const course: Course = {
   holes: holes,
+  capacity: 9,
 }
 
 const facilities: Facility[] = [
@@ -49,21 +51,24 @@ const initialPark: Park = {
   facilities: [clubhouse, ...facilities],
 }
 
-const firstHole: Hole = {
-  id: 'hole-1',
-  name: 'Hole 1',
-  kind: 'hole',
-}
-
-function buildFirstHole(currentPark: Park): Park {
-  if(currentPark.course.holes.length > 0){
+function buildNextHole(currentPark: Park): Park {
+  if(currentPark.course.holes.length >= currentPark.course.capacity){
     return currentPark
   }
+
+  const nextHoleNumber = currentPark.course.holes.length + 1
+
+  const nextHole: Hole = {
+    id: `hole-${nextHoleNumber}`,
+    name: `Hole ${nextHoleNumber}`,
+    kind: 'hole',
+  }
+
   return {
     ...currentPark,
     course: {
       ...currentPark.course,
-      holes: [...currentPark.course.holes, firstHole],
+      holes: [...currentPark.course.holes, nextHole],
     },
   }
 }
@@ -77,18 +82,31 @@ function App() {
       <section className="park">
         <h2>Disc Golf Park</h2>
         <div className="holes">
-          {park.course.holes.length === 0 && (
+          {park.course.holes.length < park.course.capacity && (
             <div className="empty-course">
-              <p>Your course is empty. Build your first hole to get started.</p>
+              <p>
+                {park.course.holes.length === 0
+                  ? 'Your course is empty. Build your first hole to get started.'
+                  : `${park.course.holes.length} of ${park.course.capacity} holes built.`
+                }
+              </p>
+
               <button
                 type="button"
                 onClick={() =>
-                  setPark((currentPark) => buildFirstHole(currentPark))
+                  setPark((currentPark) => buildNextHole(currentPark))
                 }
               >
-                Build first hole
+                {park.course.holes.length === 0
+                  ? 'Build first hole'
+                  : 'Build next hole'}
               </button>
             </div>
+          )}
+          {park.course.holes.length >= park.course.capacity && (
+            <p className="course-complete">
+              Your {park.course.capacity}-hole course is complete.
+            </p>
           )}
           {park.course.holes.map((hole) => (
             <button
