@@ -1,29 +1,13 @@
 import { useState } from 'react'
+import { buildNextHole } from './domain/park'
+import type {
+  Course,
+  Facility,
+  Hole,
+  Park,
+  ParkItem
+} from './domain/park'
 import './App.css'
-
-type Hole = {
-  id: string
-  name: string
-  kind: 'hole'
-}
-
-type Facility = {
-  id: string
-  name: string
-  kind: 'facility'
-}
-
-type ParkItem = Hole | Facility
-
-type Course = {
-  holes: Hole[]
-  capacity: 9 | 18
-}
-
-type Park = {
-  course: Course
-  facilities: Facility[]
-}
 
 const holes: Hole[] = []
 
@@ -49,28 +33,6 @@ const clubhouse: Facility = {
 const initialPark: Park = {
   course: course,
   facilities: [clubhouse, ...facilities],
-}
-
-function buildNextHole(currentPark: Park): Park {
-  if(currentPark.course.holes.length >= currentPark.course.capacity){
-    return currentPark
-  }
-
-  const nextHoleNumber = currentPark.course.holes.length + 1
-
-  const nextHole: Hole = {
-    id: `hole-${nextHoleNumber}`,
-    name: `Hole ${nextHoleNumber}`,
-    kind: 'hole',
-  }
-
-  return {
-    ...currentPark,
-    course: {
-      ...currentPark.course,
-      holes: [...currentPark.course.holes, nextHole],
-    },
-  }
 }
 
 function App() {
